@@ -42,8 +42,6 @@ it(
             'question' => str_repeat('*', 8) . '?',
         ]);
 
-        //dd(request()->question);
-
         // Assert -> verificar
         $request->assertSessionHasErrors(['question' => __('validation.min.string', ['min' => 10, 'attribute' => 'question'])]);
         assertDatabaseCount('questions', 0);

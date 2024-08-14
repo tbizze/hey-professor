@@ -26,13 +26,13 @@ it(
 it(
     'deve verificar se termina com ponto de interrogação',
     function () {
-        expect(true)->toBeTrue();
+        // expect(true)->toBeTrue();
     }
 );
 
 it(
     'deve ter pelo menos 10 caracteres',
     function () {
-        expect(true)->toBeTrue();
+        // expect(true)->toBeTrue();
     }
 );

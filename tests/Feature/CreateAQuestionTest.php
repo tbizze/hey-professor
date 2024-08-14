@@ -24,9 +24,22 @@ it(
 );
 
 it(
-    'deve verificar se termina com ponto de interrogação',
+    'deve verificar se termina com ponto de interrogação ?',
     function () {
         // expect(true)->toBeTrue();
+
+        // Arrange -> preparar
+        $user = User::factory()->create();
+        actingAs($user);
+
+        // Act -> agir
+        $request = post(route('question.store'), [
+            'question' => str_repeat('*', 10),
+        ]);
+
+        // Assert -> verificar
+        $request->assertSessionHasErrors(['question' => 'Você tem certeza de que é uma pergunta? Pois está faltando interrogação no final.']);
+        assertDatabaseCount('questions', 0);
     }
 );
 

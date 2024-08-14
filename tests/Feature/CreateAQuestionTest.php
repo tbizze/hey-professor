@@ -33,6 +33,19 @@ it(
 it(
     'deve ter pelo menos 10 caracteres',
     function () {
-        // expect(true)->toBeTrue();
+        // Arrange -> preparar
+        $user = User::factory()->create();
+        actingAs($user);
+
+        // Act -> agir
+        $request = post(route('question.store'), [
+            'question' => str_repeat('*', 8) . '?',
+        ]);
+
+        //dd(request()->question);
+
+        // Assert -> verificar
+        $request->assertSessionHasErrors(['question' => __('validation.min.string', ['min' => 10, 'attribute' => 'question'])]);
+        assertDatabaseCount('questions', 0);
     }
 );

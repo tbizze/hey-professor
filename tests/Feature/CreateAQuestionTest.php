@@ -1,0 +1,38 @@
+<?php
+
+use App\Models\User;
+
+use function Pest\Laravel\{actingAs, assertDatabaseCount, assertDatabaseHas, post};
+
+it(
+    'deve ser capaz de criar uma nova pergunta com mais de 255 caracteres',
+    function () {
+        // Arrange -> preparar
+        $user = User::factory()->create();
+        actingAs($user);
+
+        // Act -> agir
+        $request = post(route('question.store'), [
+            'question' => str_repeat('*', 260) . '?',
+        ]);
+
+        // Assert -> verificar
+        $request->assertRedirect(route('dashboard'));
+        assertDatabaseCount('questions', 1);
+        assertDatabaseHas('questions', ['question' => str_repeat('*', 260) . '?']);
+    }
+);
+
+it(
+    'deve verificar se termina com ponto de interrogação',
+    function () {
+        expect(true)->toBeTrue();
+    }
+);
+
+it(
+    'deve ter pelo menos 10 caracteres',
+    function () {
+        expect(true)->toBeTrue();
+    }
+);

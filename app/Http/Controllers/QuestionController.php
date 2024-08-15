@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Rules\EndWithQuestionMarkRule;
 use Closure;
 use Illuminate\Http\{RedirectResponse, Request};
 
@@ -21,6 +22,7 @@ class QuestionController extends Controller
                         $fail("Você tem certeza de que é uma pergunta? Pois está faltando interrogação no final.");
                     }
                 },
+                //new EndWithQuestionMarkRule,
             ],
         ]);
 

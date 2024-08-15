@@ -3,18 +3,14 @@
 use App\Http\Controllers\{ProfileController, QuestionController};
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
+    if (app()->isLocal()) {
+        // Para fins de teste, faça login como usuário com ID 1 no desenvolvimento local.
+        auth()->loginUsingId(1);
+
+        return to_route('dashboard');
+    }
+
     return view('welcome');
 });
 

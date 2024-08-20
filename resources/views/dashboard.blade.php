@@ -5,7 +5,6 @@
         </x-header>
     </x-slot>
 
-
     <x-container>
         <x-form post :action="route('question.store')">
 
